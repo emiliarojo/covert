@@ -1,4 +1,5 @@
-import './App.css';
+import logo from './logo.svg';
+import './App.scss';
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import DistrictsData from "./data/districts.geojson";
@@ -75,6 +76,11 @@ export default function App() {
 
   return (
     <div>
+      <div class='navbar'>
+        <h2>
+          COVERT
+        </h2>
+      </div>
       <div ref={mapContainer} className="map-container" />
     </div>
   );
