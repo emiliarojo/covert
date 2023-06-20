@@ -99,12 +99,13 @@ export default function App() {
 
     map.current.on('click', 'district-fills', (e) => {
       const coordinates = e.lngLat;
-      const description = e.features[0].properties.description;
+      // const description = e.features[0].properties.description;
 
       const popupContent = (
         <div>
           <h3>Popup</h3>
-          <p>{description}</p>
+          {/* <p>{description} </p> */}
+          <p>Description</p>
         </div>
       );
 

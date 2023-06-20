@@ -12,15 +12,22 @@ code {
     monospace;
 }
 
+
+
 .map-container {
   height: 100vh;
   width: 100%;
 }
 
 .mapboxgl-popup {
-  width: 500px;
-  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font: 12px/20px 'Roboto', sans-serif;
+  text-align: center;
   }
+
+.mapboxgl-popup-content {
+  width: 200px;
+  height: 150px;
+}
 
 .btn {
   position: absolute;
