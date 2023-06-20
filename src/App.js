@@ -2,7 +2,9 @@ import logo from './logo.svg';
 import './App.scss';
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import DistrictsData from "./data/districts.geojson";
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiZW1pbGlhcm9qbyIsImEiOiJjbGFiM2xrMWMwYWl6M3BxcjZ6eGxqZzRjIn0.He81tZ6jjCziNZcwAKcpUA';
 
 export default function App() {
@@ -11,9 +13,10 @@ export default function App() {
   const [lng, setLng] = useState(2.154007);
   const [lat, setLat] = useState(41.390205);
   const [zoom, setZoom] = useState(11.25);
+  const [hoveredPolygonId, setHoveredPolygonId] = useState(null);
 
   useEffect(() => {
-    map.current = new mapboxgl.Map({
+      map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/light-v11',
       center: [lng, lat],
@@ -63,6 +66,37 @@ export default function App() {
         });
       }
     });
+
+    map.current.on('mousemove', 'district-fills', (e) => {
+      if (e.features.length > 0) {
+        if (hoveredPolygonId !== null) {
+          map.current.setFeatureState(
+            { source: 'districts', id: hoveredPolygonId },
+            { hover: false }
+          );
+        }
+        const newHoveredPolygonId = e.features[0].id;
+        map.current.setFeatureState(
+          { source: 'districts', id: newHoveredPolygonId },
+          { hover: true }
+        );
+        setHoveredPolygonId(newHoveredPolygonId);
+      }
+    });
+
+    map.current.on('mouseleave', 'district-fills', () => {
+      if (hoveredPolygonId !== null) {
+        map.current.setFeatureState(
+          { source: 'districts', id: hoveredPolygonId },
+          { hover: false }
+        );
+      }
+      setHoveredPolygonId(null);
+    });
+
+    return () => {
+      map.current.remove();
+    };
   }, []);
 
   useEffect(() => {
@@ -76,15 +110,14 @@ export default function App() {
 
   return (
     <div>
-      <div class='navbar'>
-        <h2>
-          COVERT
-        </h2>
+      <div className='navbar'>
+        <h2>COVERT</h2>
       </div>
-      <div ref={mapContainer} className="map-container" />
+      <div ref={mapContainer} className='map-container' />
     </div>
   );
 }
+
 
 function RainBarrels() {
   <div class="solution-card">
