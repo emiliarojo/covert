@@ -95,6 +95,11 @@ export default function App() {
       hoveredPolygonId = null;
     });
 
+    map.current.on('click', 'district-fills', () => {
+      console.log("pop up");
+    });
+
+
 
   }, []);
 
