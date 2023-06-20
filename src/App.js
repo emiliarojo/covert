@@ -13,21 +13,7 @@ export default function App() {
   const [lng, setLng] = useState(2.154007);
   const [lat, setLat] = useState(41.390205);
   const [zoom, setZoom] = useState(11.25);
-  const [hoveredPolygonId, setHoveredPolygonId] = useState(null);
-  const url = 'https://what-jx88.onrender.com/example'
-  fetch(url, {
-    method: 'GET',
-    headers: {'Content-Type':'application/json'}
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-  
-
+  let hoveredPolygonId = null;
 
   useEffect(() => {
       map.current = new mapboxgl.Map({
@@ -45,7 +31,7 @@ export default function App() {
       if (!map.current.getSource('districts')) {
         map.current.addSource('districts', {
           type: 'geojson',
-          data: DistrictsData
+          data: DistrictsData,
         });
       }
 
@@ -89,12 +75,11 @@ export default function App() {
             { hover: false }
           );
         }
-        const newHoveredPolygonId = e.features[0].id;
+        hoveredPolygonId = e.features[0].id;
         map.current.setFeatureState(
-          { source: 'districts', id: newHoveredPolygonId },
+          { source: 'districts', id: hoveredPolygonId },
           { hover: true }
         );
-        setHoveredPolygonId(newHoveredPolygonId);
       }
     });
 
@@ -105,12 +90,10 @@ export default function App() {
           { hover: false }
         );
       }
-      setHoveredPolygonId(null);
+      hoveredPolygonId = null;
     });
 
-    return () => {
-      map.current.remove();
-    };
+
   }, []);
 
   useEffect(() => {
