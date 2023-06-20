@@ -2,10 +2,10 @@ import logo from './logo.svg';
 import './App.scss';
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import DistrictsData from "./data/districts.geojson";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import SearchOverlay from "./SearchOverlay";
 mapboxgl.accessToken = 'pk.eyJ1IjoiZW1pbGlhcm9qbyIsImEiOiJjbGFiM2xrMWMwYWl6M3BxcjZ6eGxqZzRjIn0.He81tZ6jjCziNZcwAKcpUA';
 
 export default function App() {
@@ -14,10 +14,11 @@ export default function App() {
   const [lng, setLng] = useState(2.154007);
   const [lat, setLat] = useState(41.390205);
   const [zoom, setZoom] = useState(11.25);
-  const [modalVisible, setModalVisible] = useState(false);
+  let hoveredPolygonId = null;
+
 
   useEffect(() => {
-    map.current = new mapboxgl.Map({
+      map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/light-v11',
       center: [lng, lat],
@@ -32,7 +33,7 @@ export default function App() {
       if (!map.current.getSource('districts')) {
         map.current.addSource('districts', {
           type: 'geojson',
-          data: DistrictsData
+          data: DistrictsData,
         });
       }
 
@@ -67,6 +68,34 @@ export default function App() {
         });
       }
     });
+
+    map.current.on('mousemove', 'district-fills', (e) => {
+      if (e.features.length > 0) {
+        if (hoveredPolygonId !== null) {
+          map.current.setFeatureState(
+            { source: 'districts', id: hoveredPolygonId },
+            { hover: false }
+          );
+        }
+        hoveredPolygonId = e.features[0].id;
+        map.current.setFeatureState(
+          { source: 'districts', id: hoveredPolygonId },
+          { hover: true }
+        );
+      }
+    });
+
+    map.current.on('mouseleave', 'district-fills', () => {
+      if (hoveredPolygonId !== null) {
+        map.current.setFeatureState(
+          { source: 'districts', id: hoveredPolygonId },
+          { hover: false }
+        );
+      }
+      hoveredPolygonId = null;
+    });
+
+
   }, []);
 
   useEffect(() => {
@@ -80,10 +109,8 @@ export default function App() {
 
   return (
     <div>
-      <div class='navbar'>
-        <h2>
-          COVERT
-        </h2>
+      <div className='navbar'>
+        <h2>COVERT</h2>
       </div>
       <div ref={mapContainer} className="map-container">
         <Popup trigger={<button className='btn'>COVERT</button>} position="bottom right">
@@ -100,6 +127,7 @@ export default function App() {
     </div>
   );
 }
+
 
 function RainBarrels() {
   <div class="solution-card">
