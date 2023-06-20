@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# Proyecto Covert
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Proyecto de vegetación urbana y soluciones para la sequía en las ciudades
 
-## Available Scripts
+## Descripción
 
-In the project directory, you can run:
+Este proyecto surge con el objetivo de abordar la problemática de sequía en Barcelona y la falta de vegetación en los distintos distritos. Como empresa de vegetación urbana, nos hemos propuesto ofrecer soluciones para mejorar el entorno verde de la ciudad y aconsejar sobre un mejor uso del agua.
 
-### `npm start`
+Deseamos añadir vegetación a la ciudad en forma de jardines verticales, cubiertas verdes y otros elementos urbanos, ya que la vegetación desempeña un papel crucial en el equilibrio climático y favorece la precipitación al reducir la temperatura ambiente. Conscientes de la escasez de agua para riego, nuestro enfoque consiste en utilizar plantas adaptadas al clima mediterráneo que puedan mantenerse por sí solas.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Análisis de Datos
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Hemos realizado un análisis de Data Science utilizando datos históricos de lluvias y temperaturas desde 1950 hasta la actualidad. Este análisis nos ha permitido comprender las condiciones climáticas de Barcelona y su impacto en la vegetación.
 
-### `npm test`
+Además, hemos analizado la distribución y ubicación de los jardines verticales existentes en la ciudad, lo que nos ha proporcionado una visión general de los esfuerzos actuales en la implementación de espacios verdes verticales y la falta de estos en algunas zonas.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Como parte de nuestra investigación, hemos creado mapas de calor que representan el indicador de gradación del nivel de vegetación y el indicador de vulnerabilidad por falta de espacios verdes y exposición al calor. Estos mapas nos han permitido identificar los distritos de Barcelona con menor nivel de vegetación y mayor vulnerabilidad y ver como estos tienen bastante correlación.
 
-### `npm run build`
+## Proyecto
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Hemos desarrollado una plataforma web interactiva donde presentamos nuestras propuestas y soluciones específicas para cada distrito de Barcelona en función de su nivel de vegetación actual. Estas propuestas incluyen la ubicación estratégica de nuevos jardines verticales, la creación de áreas verdes adicionales y otras iniciativas para fomentar la vegetación urbana y el aprovechamiento del agua.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Contribuyentes
 
-### `npm run eject`
+- Emilia Rojo
+- Francisco Regalado
+- Florian Guerin
+- Alfred Inga
+- Marina Sindreu
+- Ignacio Macaya
+- Yulia Chernykh
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+¡Gracias por tu interés en nuestro proyecto! Si tienes alguna pregunta o sugerencia, no dudes en contactarnos.
