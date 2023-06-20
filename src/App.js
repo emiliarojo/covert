@@ -3,6 +3,9 @@ import './App.scss';
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import DistrictsData from "./data/districts.geojson";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import SearchOverlay from "./SearchOverlay";
 mapboxgl.accessToken = 'pk.eyJ1IjoiZW1pbGlhcm9qbyIsImEiOiJjbGFiM2xrMWMwYWl6M3BxcjZ6eGxqZzRjIn0.He81tZ6jjCziNZcwAKcpUA';
 
 export default function App() {
@@ -11,6 +14,7 @@ export default function App() {
   const [lng, setLng] = useState(2.154007);
   const [lat, setLat] = useState(41.390205);
   const [zoom, setZoom] = useState(11.25);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     map.current = new mapboxgl.Map({
@@ -81,7 +85,18 @@ export default function App() {
           COVERT
         </h2>
       </div>
-      <div ref={mapContainer} className="map-container" />
+      <div ref={mapContainer} className="map-container">
+        <Popup trigger={<button className='btn'>COVERT</button>} position="bottom right">
+        {close => (
+          <div className='popup-card'>
+            Content here
+            <a className="close" onClick={close}>
+              &times;
+            </a>
+          </div>
+        )}
+        </Popup>
+      </div>
     </div>
   );
 }
