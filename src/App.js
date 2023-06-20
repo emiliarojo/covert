@@ -14,6 +14,20 @@ export default function App() {
   const [lat, setLat] = useState(41.390205);
   const [zoom, setZoom] = useState(11.25);
   const [hoveredPolygonId, setHoveredPolygonId] = useState(null);
+  const url = 'https://what-jx88.onrender.com/example'
+  fetch(url, {
+    method: 'GET',
+    headers: {'Content-Type':'application/json'}
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  
+
 
   useEffect(() => {
       map.current = new mapboxgl.Map({
