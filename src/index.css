@@ -17,6 +17,11 @@ code {
   width: 100%;
 }
 
+.mapboxgl-popup {
+  width: 500px;
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  }
+
 .btn {
   position: absolute;
   top: 50px;

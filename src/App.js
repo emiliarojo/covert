@@ -6,6 +6,9 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import DistrictsData from "./data/districts.geojson";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { renderToString } from 'react-dom/server';
+import ReactDOM from 'react-dom';
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiZW1pbGlhcm9qbyIsImEiOiJjbGFiM2xrMWMwYWl6M3BxcjZ6eGxqZzRjIn0.He81tZ6jjCziNZcwAKcpUA';
 
 export default function App() {
@@ -16,9 +19,8 @@ export default function App() {
   const [zoom, setZoom] = useState(11.25);
   let hoveredPolygonId = null;
 
-
   useEffect(() => {
-      map.current = new mapboxgl.Map({
+    map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/light-v11',
       center: [lng, lat],
@@ -95,8 +97,28 @@ export default function App() {
       hoveredPolygonId = null;
     });
 
-    map.current.on('click', 'district-fills', () => {
-      console.log("pop up");
+    map.current.on('click', 'district-fills', (e) => {
+      const coordinates = e.lngLat;
+      const description = e.features[0].properties.description;
+
+      const popupContent = (
+        <div>
+          <h3>Popup</h3>
+          <p>{description}</p>
+        </div>
+      );
+
+      const html = renderToString(popupContent);
+      const popup = new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map.current);
+
+      const closePopup = () => {
+        popup.remove();
+      };
+
+      popup.on('close', () => {
+        // Delay the removal of the popup to allow the 'close' event to finish
+        setTimeout(closePopup, 0);
+      });
     });
 
 
@@ -113,25 +135,15 @@ export default function App() {
   }, []);
 
   return (
-    <div>
+    <div className='page-container'>
       <div className='navbar'>
         <h2>COVERT</h2>
       </div>
-      <div ref={mapContainer} className="map-container">
-      </div>
-        <Popup trigger={<button className='btn'>COVERT</button>}>
-        {close => (
-          <div className='popup-card'>
-            Content here
-            <a className="close" onClick={close}>
-              &times;
-            </a>
-          </div>
-        )}
-        </Popup>
+      <div ref={mapContainer} className="map-container"></div>
     </div>
   );
 }
+
 
 
 function RainBarrels() {
