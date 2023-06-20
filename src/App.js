@@ -138,5 +138,3 @@ function EducationalCampaigns() {
     </p>
   </div>
 }
-
-export default App;
