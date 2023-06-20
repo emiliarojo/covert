@@ -96,7 +96,7 @@ export default function App() {
     });
 
     map.current.on('click', 'district-fills', () => {
-      console.log("pop up");
+
     });
 
 
@@ -122,10 +122,16 @@ export default function App() {
         <Popup trigger={<button className='btn'>COVERT</button>}>
         {close => (
           <div className='popup-card'>
-            Content here
-            <a className="close" onClick={close}>
-              &times;
-            </a>
+            <div class="solution-card">
+              <h3 class="solution-header">
+                Rain Barrels
+              </h3>
+              <p class="solution-paragrah">
+                Install rain barrels or water tanks to capture and store rainwater from rooftops.
+                These containers can be placed in outdoor spaces, such as gardens or balconies, and connected to downspouts to collect rainwater.
+                The stored water can be used for watering plants, cleaning, or other non-potable purposes.
+              </p>
+            </div>
           </div>
         )}
         </Popup>
