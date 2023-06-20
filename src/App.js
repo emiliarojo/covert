@@ -118,7 +118,8 @@ export default function App() {
         <h2>COVERT</h2>
       </div>
       <div ref={mapContainer} className="map-container">
-        <Popup trigger={<button className='btn'>COVERT</button>} position="bottom right">
+      </div>
+        <Popup trigger={<button className='btn'>COVERT</button>}>
         {close => (
           <div className='popup-card'>
             Content here
@@ -128,7 +129,6 @@ export default function App() {
           </div>
         )}
         </Popup>
-      </div>
     </div>
   );
 }

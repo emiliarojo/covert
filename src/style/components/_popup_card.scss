@@ -1,6 +1,18 @@
 .popup-card {
-  width: 84%;
-  height: 70%;
+  width: 95%;
+  height: 95%;
   border-radius: 5px;
   background-color: black;
+}
+
+.popup-content {
+  width: 84% !important;
+  height: 70%;
+  position: absolute !important;
+  top: 20% !important;
+  left: 8% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FAF9F6 !important;
 }
