@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 // import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 const accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
@@ -30,14 +30,8 @@ mapboxgl.accessToken = accessToken;
 function Navbar() {
     return (
       <div class='navbar'>
-        <h2
-          style={{
-            fontFamily : 'Oswald',
-            width : '100vw',
-            height : '70px'
-          }}
-        >
-          Covert
+        <h2>
+          COVERT
         </h2>
       </div>
     )
