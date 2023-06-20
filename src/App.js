@@ -19,12 +19,12 @@ export default function App() {
   const [zoom, setZoom] = useState(11.25);
   let hoveredPolygonId = null;
 
-  const url = 'https://what-jx88.onrender.com/example'
-  fetch(url, {
-    method: 'GET',
-    headers: {'Content-Type':'application/json'}
-  })
-  .then(response => response.json())
+  // const url = 'https://what-jx88.onrender.com/example'
+  // fetch(url, {
+  //   method: 'GET',
+  //   headers: {'Content-Type':'application/json'}
+  // })
+  // .then(response => response.json())
 
   useEffect(() => {
     map.current = new mapboxgl.Map({
