@@ -10,8 +10,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-map-gl": "^7.0.25",
+    "react-modal": "^3.16.1",
+    "react-responsive-modal": "^6.4.2",
     "react-scripts": "5.0.1",
+    "reactjs-popup": "^2.0.5",
     "sass": "^1.63.4",
+    "styled-components": "^6.0.0-rc.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
