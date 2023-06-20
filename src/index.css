@@ -19,5 +19,6 @@ code {
 
 .btn {
   position: absolute;
+  top: 50px;
   z-index: 3;
 }
