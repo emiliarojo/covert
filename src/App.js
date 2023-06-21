@@ -18,7 +18,7 @@ function getColorShade(index) {
     '#BCDCCC', // Shade 0
     '#BDDDCD',
     '#BFDFCF',
-    '#C0E0D0',
+    '#C0E0D0', //Shade 3
     '#C1E1D1',
     '#C2E2D2',
     '#C3E3D3',
