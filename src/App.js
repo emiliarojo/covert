@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import DistrictsData from "./data/districts.geojson";
+import SolutionsData from "./data/solutions.json";
 import JardinesData from "./data/jardines.json"
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
@@ -24,25 +25,12 @@ function getColorShade(index) {
     '#BFDFCF' // Shade 7
   ];
 
-  switch (index) {
-    case -1:
-      return shades[0];
-    case 0:
-      return shades[0];
-    case 1:
-      return shades[1];
-    case 2:
-      return shades[2];
-    case 3:
-      return shades[3];
-    case 4:
-      return shades[4];
-    case 5:
-      return shades[5];
-    case 6:
-      return shades[6];
-    default:
-      return shades[7]; // For indices above 6
+  if (index < 0) {
+    return shades[0];
+  } else if (index <= 6) {
+    return shades[index];
+  } else {
+    return shades[7];
   }
 }
 
@@ -188,21 +176,21 @@ export default function App() {
 
     map.current.on('click', 'district-fills', (e) => {
       const coordinates = e.lngLat;
-      const url = 'http://localhost:8080/solutions';
-      fetch(url, {
-        method: 'GET',
-        headers: {'Content-Type':'application/json'}
-      })
+      // fetch(url, {
+      //   method: 'GET',
+      //   headers: {'Content-Type':'application/json'}
+      // })
+      let popupContent;
+      fetch(SolutionsData)
         .then(response => response.json()) // Parse the response as JSON
         .then((data) => {
-          const popupHeader = data.solution; // Assuming the response contains the solution data
-          const popupContent = (
-            <div>
-              <h3>{data.title}</h3>
-              {/* <p>{popupHeader}</p> */}
-              <p>{data.description}</p>
+          // const popupHeader = data.solution; // Assuming the response contains the solution data
+          popupContent = data.map((item) => (
+            <div key={item.id}>
+              <h3>District: {item.name}</h3>
+              <p>Solution Proposal:{item.solution}</p>
             </div>
-          );
+          ));
 
           const html = renderToString(popupContent);
           const popup = new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map.current);
@@ -255,59 +243,4 @@ export default function App() {
       <div ref={mapContainer} className="map-container"></div>
     </div>
   );
-}
-
-
-
-function RainBarrels() {
-  <div class="solution-card">
-    <h3 class="solution-header">
-      Rain Barrels
-    </h3>
-    <p class="solution-paragrah">
-      Install rain barrels or water tanks to capture and store rainwater from rooftops.
-      These containers can be placed in outdoor spaces, such as gardens or balconies, and connected to downspouts to collect rainwater.
-      The stored water can be used for watering plants, cleaning, or other non-potable purposes.
-    </p>
-  </div>
-}
-
-function GreenInfrastructure() {
-  <div class="solution-card">
-    <h3 class="solution-header">
-      Green Infrastructure
-    </h3>
-    <p class="solution-paragrah">
-      Barcelona can implement green infrastructure solutions, such as green roofs and permeable pavements.
-      Green roofs are designed with vegetation and special drainage layers that capture rainwater and allow it to slowly release or be used by the plants.
-      Permeable pavements, on the other hand, allow rainwater to seep through the surface into the ground, replenishing groundwater and reducing runoff.
-      These measures can help reduce the burden on stormwater systems and increase groundwater recharge.
-    </p>
-  </div>
-}
-
-function PermeableSurfaces() {
-  <div class="solution-card">
-    <h3 class="solution-header">
-      Permeable Surfaces
-    </h3>
-    <p class="solution-paragrah">
-      Promote the use of permeable surfaces in urban areas.
-      Permeable pavements, such as porous concrete or interlocking pavers, allow rainwater to infiltrate into the ground instead of creating runoff.
-      This helps recharge groundwater and reduces the burden on stormwater drainage systems.
-    </p>
-  </div>
-}
-
-function EducationalCampaigns() {
-  <div class="solution-card">
-    <h3 class="solution-header">
-    Educational Campaigns
-    </h3>
-    <p class="solution-paragrah">
-      Raise awareness and educate the public about the importance of rainwater conservation.
-      Organize workshops, seminars, or informational campaigns to teach residents about simple water-saving practices, such as using watering cans instead of hoses, timing irrigation to avoid water waste, or reducing water consumption in households.
-      Empowering individuals with knowledge can lead to widespread adoption of water-saving behaviors.
-    </p>
-  </div>
 }
