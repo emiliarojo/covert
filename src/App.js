@@ -27,8 +27,8 @@ function getColorShade(index) {
 
   if (index < 0) {
     return shades[0];
-  } else if (index <= 6) {
-    return shades[index];
+  } else if (index < 7) {
+    return shades[Math.trunc(index)];
   } else {
     return shades[7];
   }
