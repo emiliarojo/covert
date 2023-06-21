@@ -1,0 +1,62 @@
+[
+  {
+      "id": 1,
+      "name": "Ciutat Vella",
+      "levelVegetation": 2.0,
+      "solution": "🌱 Green Infrastructure"
+  },
+  {
+      "id": 2,
+      "name": "Eixample",
+      "levelVegetation": 1.0,
+      "solution": "🌱 Green Infrastructure"
+  },
+  {
+      "id": 3,
+      "name": "Sants-Montjuïc",
+      "levelVegetation": 1.5,
+      "solution": "🌱 Green Infrastructure"
+  },
+  {
+      "id": 4,
+      "name": "Les Corts",
+      "levelVegetation": 3.5,
+      "solution": "🌱 Green Infrastructure"
+  },
+  {
+      "id": 5,
+      "name": "Sarrià-Sant Gervasi",
+      "levelVegetation": 5.0,
+      "solution": "🌱 Green Infrastructure"
+  },
+  {
+      "id": 6,
+      "name": "Gràcia",
+      "levelVegetation": 1.5,
+      "solution": "🌱 Green Infrastructure"
+  },
+  {
+      "id": 7,
+      "name": "Horta-Guinardó",
+      "levelVegetation": 4.5,
+      "solution": "🌱 Green Infrastructure"
+  },
+  {
+      "id": 8,
+      "name": "Nou Barris",
+      "levelVegetation": 5.0,
+      "solution": "🌱 Green Infrastructure"
+  },
+  {
+      "id": 9,
+      "name": "Sant Andreu",
+      "levelVegetation": 0.0,
+      "solution": "🌱 Green Infrastructure"
+  },
+  {
+      "id": 10,
+      "name": "Sant Martí",
+      "levelVegetation": 1.5,
+      "solution": "🌱 Green Infrastructure"
+  }
+]
