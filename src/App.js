@@ -186,53 +186,53 @@ export default function App() {
       hoveredPolygonId = null;
     });
 
-    // map.current.on('click', 'district-fills', (e) => {
-    //   const coordinates = e.lngLat;
-    //   const url = '';
-    //   fetch(url, {
-    //     method: 'GET',
-    //     headers: {'Content-Type':'application/json'}
-    //   })
-    //     .then(response => response.json()) // Parse the response as JSON
-    //     .then((data) => {
-    //       const popupHeader = data.solution; // Assuming the response contains the solution data
-    //       const popupContent = (
-    //         <div>
-    //           <h3>{data.district}</h3>
-    //           <p>{popupHeader}</p>
-    //           <p>{data.description}</p>
-    //         </div>
-    //       );
+    map.current.on('click', 'district-fills', (e) => {
+      const coordinates = e.lngLat;
+      const url = 'http://localhost:8080/solutions';
+      fetch(url, {
+        method: 'GET',
+        headers: {'Content-Type':'application/json'}
+      })
+        .then(response => response.json()) // Parse the response as JSON
+        .then((data) => {
+          const popupHeader = data.solution; // Assuming the response contains the solution data
+          const popupContent = (
+            <div>
+              <h3>{data.title}</h3>
+              {/* <p>{popupHeader}</p> */}
+              <p>{data.description}</p>
+            </div>
+          );
 
-    //       const html = renderToString(popupContent);
-    //       const popup = new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map.current);
+          const html = renderToString(popupContent);
+          const popup = new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map.current);
 
-    //       const closePopup = () => {
-    //         popup.remove();
-    //       };
+          const closePopup = () => {
+            popup.remove();
+          };
 
-    //       popup.on('close', () => {
-    //         // Delay the removal of the popup to allow the 'close' event to finish
-    //         setTimeout(closePopup, 0);
-    //       });
-    //     })
-    //     .catch(error => {
-    //       console.error('Error fetching JSON:', error);
-    //     });
+          popup.on('close', () => {
+            // Delay the removal of the popup to allow the 'close' event to finish
+            setTimeout(closePopup, 0);
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching JSON:', error);
+        });
 
 
-    //   const html = renderToString(popupContent);
-    //   const popup = new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map.current);
+      const html = renderToString(popupContent);
+      const popup = new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map.current);
 
-    //   const closePopup = () => {
-    //     popup.remove();
-    //   };
+      const closePopup = () => {
+        popup.remove();
+      };
 
-    //   popup.on('close', () => {
-    //     // Delay the removal of the popup to allow the 'close' event to finish
-    //     setTimeout(closePopup, 0);
-    //   });
-    // });
+      popup.on('close', () => {
+        // Delay the removal of the popup to allow the 'close' event to finish
+        setTimeout(closePopup, 0);
+      });
+    });
 
 
 
