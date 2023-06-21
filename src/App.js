@@ -4,8 +4,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import DistrictsData from "./data/districts.geojson";
-import SolutionsData from "./data/solutions.json";
-import JardinesData from "./data/jardines.json"
+import SolutionsData from "./data/solutions.geojson";
+// import JardinesData from "./data/jardines.json"
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { renderToString } from 'react-dom/server';
@@ -15,14 +15,14 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZW1pbGlhcm9qbyIsImEiOiJjbGFiM2xrMWMwYWl6M3Bxc
 // Function to calculate color shade based on index
 function getColorShade(index) {
   const shades = [
-    '#BFDFCF', // Shade 0
+    '#BCDCCC', // Shade 0
+    '#BDDDCD',
     '#BFDFCF',
-    '#BFDFCF',
-    '#BFDFCF',
-    '#BFDFCF',
-    '#BFDFCF',
-    '#BFDFCF',
-    '#BFDFCF' // Shade 7
+    '#C0E0D0', //Shade 3
+    '#C1E1D1',
+    '#C2E2D2',
+    '#C3E3D3',
+    '#C4E4D4' // Shade 7
   ];
 
   if (index < 0) {
@@ -133,18 +133,18 @@ export default function App() {
 
 
 
-      fetch('JardinesData')
-      .then(response => response.json())
-      .then(data => {
-        data.Coordenadas.forEach((coord, index) => {
-          const [lat, lng] = coord;
-          const marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
-          marker.setPopup(new mapboxgl.Popup().setHTML(`<h3>${data.Nombre[index]}</h3><p>${data.Distrito[index]}</p>`));
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching JSON:', error);
-  });
+    //   fetch('JardinesData')
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     data.Coordenadas.forEach((coord, index) => {
+    //       const [lat, lng] = coord;
+    //       const marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
+    //       marker.setPopup(new mapboxgl.Popup().setHTML(`<h3>${data.Nombre[index]}</h3><p>${data.Distrito[index]}</p>`));
+    //     });
+    //   })
+    //   .catch(error => {
+    //     console.error('Error fetching JSON:', error);
+    // });
 
     });
 
@@ -188,7 +188,7 @@ export default function App() {
           popupContent = data.map((item) => (
             <div key={item.id}>
               <h3>District: {item.name}</h3>
-              <p>Solution Proposal:{item.solution}</p>
+              <p>Solution Proposal: {item.solution}</p>
             </div>
           ));
 
