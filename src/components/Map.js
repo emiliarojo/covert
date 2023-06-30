@@ -3,10 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import DistrictsData from "../data/districts.geojson";
 import SolutionsData from "../data/solutions.geojson";
-import JardinesData from "../data/jardines.geojson";
-// import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import { renderToString } from 'react-dom/server';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZW1pbGlhcm9qbyIsImEiOiJjbGo3aXRqejAwZ2wyM2RvYml5ZjY1Y3I5In0.YaPf0eyeVU7WKPERik5gTA';
 
@@ -18,31 +15,7 @@ export default function App() {
   const [lat, setLat] = useState(41.390205);
   const [zoom, setZoom] = useState(11.25);
   let hoveredPolygonId = null;
-
-
-  let colorIndex = [];
-  fetch(SolutionsData)
-    .then(response => response.json()) // Parse the response as JSON
-    .then((data) => {
-      data.forEach(element => {
-        colorIndex.push(element.levelVegetation);
-      });
-    })
-    .catch(error => {
-      console.error('Error fetching JSON:', error);
-    });
-
-    console.log(colorIndex);
-
   const colorArray = ["#D8EFE2", "#EBF7F2", "#BFDFCF", "#99BBA9", "#6C9E88", "#4D7B65"];
-
-  // colorIndex.forEach(element => {
-  //   if (element > 0 && element <= 1) {
-
-  //   }
-  // });
-
-
 
 
   useEffect(() => {
@@ -86,30 +59,6 @@ export default function App() {
         });
       }
 
-
-
-      // if (!map.current.getLayer('district-fills')) {
-      //   map.current.addLayer({
-      //     id: 'district-fills',
-      //     type: 'fill',
-      //     source: 'districts',
-      //     layout: {},
-      //     paint: {
-      //       'fill-color': [
-      //         'case',
-      //         ['boolean', ['feature-state', 'hover'], false],
-      //         '#BFDFCF', // Hovered state color
-      //         ['interpolate', ['linear'], ['get', 'index'], 0, getColorShade(0), 6, getColorShade(6)],
-      //       ],
-      //       'fill-opacity': [
-      //         'case',
-      //         ['boolean', ['feature-state', 'hover'], false],
-      //         1,
-      //         0.5
-      //       ]
-      //     }
-      //   });
-      // }
 
       if (!map.current.getLayer('district-borders')) {
         map.current.addLayer({
@@ -168,6 +117,7 @@ export default function App() {
           { source: 'districts', id: hoveredPolygonId },
           { hover: true }
         );
+
       }
     });
 
@@ -183,24 +133,19 @@ export default function App() {
 
     map.current.on('click', 'district-fills', (e) => {
       const coordinates = e.lngLat;
-      // fetch(url, {
-      //   method: 'GET',
-      //   headers: {'Content-Type':'application/json'}
-      // })
-      let popupContent;
+      let html = [];
+
       fetch(SolutionsData)
-        .then(response => response.json()) // Parse the response as JSON
+        .then(response => response.json())
         .then((data) => {
-          // const popupHeader = data.solution; // Assuming the response contains the solution data
-          popupContent =
-            <div key={data[0].id}>
-              <h3>District: {data[0].name}</h3>
-              <p>Solution Proposal: {data[0].solution}</p>
-            </div>;
+          data.forEach((element) => {
+           html.push(`<div><h3>District: ${element.name}</h3><p>Solution Proposal: ${element.solution}</p></div>`);
+          });
 
-
-          const html = renderToString(popupContent);
-          const popup = new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map.current);
+          const popup = new mapboxgl.Popup()
+           .setLngLat(coordinates)
+           .setHTML(html)
+           .addTo(map.current);
 
           const closePopup = () => {
             popup.remove();
@@ -215,26 +160,12 @@ export default function App() {
           console.error('Error fetching JSON:', error);
         });
 
-
-      const html = renderToString(popupContent);
-      const popup = new mapboxgl.Popup().setLngLat(coordinates).setHTML(html).addTo(map.current);
-
-      const closePopup = () => {
-        popup.remove();
-      };
-
-      popup.on('close', () => {
-        // Delay the removal of the popup to allow the 'close' event to finish
-        setTimeout(closePopup, 0);
-      });
     });
-
-
 
   }, []);
 
   useEffect(() => {
-    if (!map.current) return; // wait for map to initialize
+    if (!map.current) return;
     map.current.on('move', () => {
       setLng(map.current.getCenter().lng.toFixed(4));
       setLat(map.current.getCenter().lat.toFixed(4));
