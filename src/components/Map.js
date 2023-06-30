@@ -59,7 +59,6 @@ export default function App() {
         });
       }
 
-
       if (!map.current.getLayer('district-borders')) {
         map.current.addLayer({
           id: 'district-borders',
@@ -72,6 +71,14 @@ export default function App() {
           }
         });
       }
+
+      map.current.on('click', 'district-fills', (e) => {
+        new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(e.features[0].properties.NOM)
+        .addTo(map.current);
+      });
+
 
       new mapboxgl.Marker({ color: 'black' }).setLngLat([2.163218, 41.39228]).addTo(map.current);
       new mapboxgl.Marker({ color: 'black' }).setLngLat([2.155247, 41.363062]).addTo(map.current);
@@ -129,37 +136,6 @@ export default function App() {
         );
       }
       hoveredPolygonId = null;
-    });
-
-    map.current.on('click', 'district-fills', (e) => {
-      const coordinates = e.lngLat;
-      let html = [];
-
-      fetch(SolutionsData)
-        .then(response => response.json())
-        .then((data) => {
-          data.forEach((element) => {
-           html.push(`<div><h3>District: ${element.name}</h3><p>Solution Proposal: ${element.solution}</p></div>`);
-          });
-
-          const popup = new mapboxgl.Popup()
-           .setLngLat(coordinates)
-           .setHTML(html)
-           .addTo(map.current);
-
-          const closePopup = () => {
-            popup.remove();
-          };
-
-          popup.on('close', () => {
-            // Delay the removal of the popup to allow the 'close' event to finish
-            setTimeout(closePopup, 0);
-          });
-        })
-        .catch(error => {
-          console.error('Error fetching JSON:', error);
-        });
-
     });
 
   }, []);
