@@ -2,10 +2,10 @@ import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import DistrictsData from "../data/districts.geojson";
-import SolutionsData from "../data/solutions.geojson";
+import JardinesData from "../data/jardines.geojson";
 import 'reactjs-popup/dist/index.css';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiZW1pbGlhcm9qbyIsImEiOiJjbGo3aXRqejAwZ2wyM2RvYml5ZjY1Y3I5In0.YaPf0eyeVU7WKPERik5gTA';
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 
 export default function App() {
@@ -92,22 +92,21 @@ export default function App() {
       new mapboxgl.Marker({ color: 'black' }).setLngLat([2.117901, 41.388439]).addTo(map.current);
       new mapboxgl.Marker({ color: 'black' }).setLngLat([2.153461, 41.398686]).addTo(map.current);
 
-
-
-
-
-    //   fetch(JardinesData)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     data.Coordenadas.forEach((coord, index) => {
-    //       const [lat, lng] = coord;
-    //       const marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
-    //       marker.setPopup(new mapboxgl.Popup().setHTML(`<h3>${data.Nombre[index]}</h3><p>${data.Distrito[index]}</p>`));
-    //     });
-    //   })
-    //   .catch(error => {
-    //     console.error('Error fetching JSON:', error);
-    // });
+      fetch(JardinesData)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        data.forEach((element) => {
+          const lat = element.corrindates[0];
+          const lng = element.corrindates[1];
+          console.log(lat, lng);
+          new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
+          // marker.setPopup(new mapboxgl.Popup().setHTML(`<h3>${data.Nombre[index]}</h3><p>${data.Distrito[index]}</p>`));
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching JSON:', error);
+      });
 
     });
 
