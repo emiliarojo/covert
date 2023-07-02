@@ -15,7 +15,7 @@ export default function App() {
   const [lat, setLat] = useState(41.390205);
   const [zoom, setZoom] = useState(11.25);
   let hoveredPolygonId = null;
-  const colorArray = ["#D8EFE2", "#EBF7F2", "#BFDFCF", "#99BBA9", "#6C9E88", "#4D7B65"];
+  const colorArray = ["#9ACDB8", "#C7E7D8", "#7BBD9F", "#5F9F80", "#3D7E5D", "#2A634B"];
 
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export default function App() {
           source: 'districts',
           layout: {},
           paint: {
-            'line-color': '#BFDFCF',
+            'line-color': '#F9FAF6',
             'line-width': 2
           }
         });
