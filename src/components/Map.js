@@ -149,11 +149,6 @@ export default function App() {
   }, []);
 
   return (
-    <div className='page-container'>
-      <div className='navbar'>
-        <h2>COVERT</h2>
-      </div>
-      <div ref={mapContainer} className="map-container"></div>
-    </div>
+    <div ref={mapContainer} className="map-container"></div>
   );
 }
