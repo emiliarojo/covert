@@ -2,11 +2,9 @@ import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import DistrictsData from "../data/districts.geojson";
-// import JardinesData from "../data/jardines.geojson";
+import JardinesData from "../data/jardines.geojson";
 import 'reactjs-popup/dist/index.css';
-
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
-
 
 export default function App() {
   const mapContainer = useRef(null);
@@ -75,38 +73,24 @@ export default function App() {
       map.current.on('click', 'district-fills', (e) => {
         new mapboxgl.Popup()
         .setLngLat(e.lngLat)
-        .setHTML(e.features[0].properties.NOM)
+        .setHTML(`<h2>${e.features[0].properties.NOM}</h2>`)
         .addTo(map.current);
       });
 
-
-      new mapboxgl.Marker({ color: 'black' }).setLngLat([2.163218, 41.39228]).addTo(map.current);
-      new mapboxgl.Marker({ color: 'black' }).setLngLat([2.155247, 41.363062]).addTo(map.current);
-      new mapboxgl.Marker({ color: 'black' }).setLngLat([2.117901, 41.388439]).addTo(map.current);
-      new mapboxgl.Marker({ color: 'black' }).setLngLat([2.177238, 41.441631]).addTo(map.current);
-      new mapboxgl.Marker({ color: 'black' }).setLngLat([2.153461, 41.398686]).addTo(map.current);
-      new mapboxgl.Marker({ color: 'black' }).setLngLat([2.199638, 41.408383]).addTo(map.current);
-      new mapboxgl.Marker({ color: 'black' }).setLngLat([2.168368, 41.379518]).addTo(map.current);
-      new mapboxgl.Marker({ color: 'black' }).setLngLat([2.186315, 41.434152]).addTo(map.current);
-      new mapboxgl.Marker({ color: 'black' }).setLngLat([2.155247, 41.363062]).addTo(map.current);
-      new mapboxgl.Marker({ color: 'black' }).setLngLat([2.117901, 41.388439]).addTo(map.current);
-      new mapboxgl.Marker({ color: 'black' }).setLngLat([2.153461, 41.398686]).addTo(map.current);
-
-      // fetch(JardinesData)
-      // .then(response => response.json())
-      // .then(data => {
-      //   console.log(data);
-      //   data.forEach((element) => {
-      //     const lat = element.corrindates[0];
-      //     const lng = element.corrindates[1];
-      //     console.log(lat, lng);
-      //     new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
-      //     // marker.setPopup(new mapboxgl.Popup().setHTML(`<h3>${data.Nombre[index]}</h3><p>${data.Distrito[index]}</p>`));
-      //   });
-      // })
-      // .catch(error => {
-      //   console.error('Error fetching JSON:', error);
-      // });
+      fetch(JardinesData)
+      .then(response => response.json())
+      .then(data => {
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+            const lat = data[key].coordinates[0];
+            const lng = data[key].coordinates[1];
+            new mapboxgl.Marker({ color: 'black' }).setLngLat([lng, lat]).addTo(map.current);
+            // marker.setPopup(new mapboxgl.Popup().setHTML(`<h3>${data[key].name}</h3>`));
+        }};
+      })
+      .catch(error => {
+        console.error('Error fetching JSON:', error);
+      });
 
     });
 
