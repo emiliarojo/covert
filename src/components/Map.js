@@ -1,9 +1,15 @@
 import React, { useRef, useEffect, useState } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import DistrictsData from "../data/districts.geojson";
 import JardinesData from "../data/jardines.geojson";
 import 'reactjs-popup/dist/index.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLeaf } from '@fortawesome/free-solid-svg-icons';
+
+
+
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 export default function App() {
@@ -71,11 +77,24 @@ export default function App() {
       }
 
       map.current.on('click', 'district-fills', (e) => {
+        const vegetationLevel = Math.floor(e.features[0].properties.levelVegetation);
+        const leafIcons = Array.from({ length: vegetationLevel }, (_, index) => (
+          <FontAwesomeIcon key={index} icon={faLeaf} />
+        ));
+
+        const leafIconsString = ReactDOMServer.renderToString(leafIcons);
+
         new mapboxgl.Popup()
-        .setLngLat(e.lngLat)
-        .setHTML(`<h2>${e.features[0].properties.NOM}</h2>`)
-        .addTo(map.current);
+          .setLngLat(e.lngLat)
+          .setHTML(`
+            <h2>${e.features[0].properties.NOM}</h2>
+            <h4>Vegetation Level  ${leafIconsString}</h4>
+          `)
+          .addTo(map.current);
       });
+
+
+
 
       fetch(JardinesData)
       .then(response => response.json())
