@@ -17,7 +17,7 @@ export default function App() {
   const map = useRef(null);
   const [lng, setLng] = useState(2.154007);
   const [lat, setLat] = useState(41.390205);
-  const [zoom, setZoom] = useState(11.25);
+  const [zoom, setZoom] = useState(11);
   let hoveredPolygonId = null;
   const colorArray = ["#9ACDB8", "#C7E7D8", "#7BBD9F", "#5F9F80", "#3D7E5D", "#2A634B"];
 
@@ -77,7 +77,7 @@ export default function App() {
       }
 
       map.current.on('click', 'district-fills', (e) => {
-        const vegetationLevel = Math.floor(e.features[0].properties.levelVegetation);
+        const vegetationLevel = Math.ceil(e.features[0].properties.levelVegetation);
         const leafIcons = Array.from({ length: vegetationLevel }, (_, index) => (
           <FontAwesomeIcon key={index} icon={faLeaf} />
         ));
@@ -88,13 +88,11 @@ export default function App() {
           .setLngLat(e.lngLat)
           .setHTML(`
             <h2>${e.features[0].properties.NOM}</h2>
-            <h4>Vegetation Level  ${leafIconsString}</h4>
+            <h4>${leafIconsString}</h4>
+            <a href = "https://ajuntament.barcelona.cat/ecologiaurbana/es/servicios/la-ciudad-funciona/mantenimiento-del-espacio-publico/gestion-del-verde-y-biodiversidad" target="_blank" class="btn-ghost">Leer Más</a>
           `)
           .addTo(map.current);
       });
-
-
-
 
       fetch(JardinesData)
       .then(response => response.json())

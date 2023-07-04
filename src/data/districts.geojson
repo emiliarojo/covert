@@ -47086,7 +47086,7 @@
         "type":"Feature",
         "id":"9",
         "properties":{
-          "levelVegetation": 0.0,
+          "levelVegetation": 0.5,
            "ID_ANNEX":"01",
            "ANNEXDESCR":"Grup - I",
            "ID_TEMA":"0104",
