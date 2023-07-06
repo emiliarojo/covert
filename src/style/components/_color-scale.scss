@@ -1,0 +1,22 @@
+.color-scale {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  position: absolute;
+  z-index: 500;
+  top: 75px;
+  left: 10px;
+}
+
+.color-scale-item {
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.emojis {
+  font-size: 28px;
+  margin: 0 5px;
+}

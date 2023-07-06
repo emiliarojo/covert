@@ -2,9 +2,10 @@ import React, { useState, useEffect }  from 'react';
 import './App.scss';
 import Map from './components/Map';
 import Modal from './components/Modal';
+import ColorScale from './components/ColorScale';
 
 export default function App() {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const isFirstTime = localStorage.getItem('isFirstTime');
@@ -25,6 +26,7 @@ export default function App() {
       <div className='navbar'>
         <h1>COVERT</h1>
       </div>
+      <ColorScale />
       <Map />
     </div>
   );

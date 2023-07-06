@@ -17,8 +17,7 @@ export default function App() {
   const [lat, setLat] = useState(41.390205);
   const [zoom, setZoom] = useState(11);
   let hoveredPolygonId = null;
-  const colorArray = ["#9ACDB8", "#C7E7D8", "#7BBD9F", "#5F9F80", "#3D7E5D", "#2A634B"];
-
+  const colorArray = [ "#C7E7D8", "#9ACDB8", "#7BBD9F", "#5F9F80", "#3D7E5D", "#2A634B"];
 
   useEffect(() => {
     map.current = new mapboxgl.Map({
@@ -87,7 +86,7 @@ export default function App() {
           .setHTML(`
             <h2>${e.features[0].properties.NOM}</h2>
             <h4>${leafIconsString}</h4>
-            <a href = "https://ajuntament.barcelona.cat/ecologiaurbana/es/servicios/la-ciudad-funciona/mantenimiento-del-espacio-publico/gestion-del-verde-y-biodiversidad" target="_blank" class="btn-ghost">Leer Más</a>
+            <a href = "https://colab.research.google.com/drive/1iRcl3FiltGNTghZu6FAbF2eI1PMAVhnc?usp=sharing" target="_blank" class="btn-ghost">Leer Más</a>
           `)
           .addTo(map.current);
       });
@@ -100,7 +99,6 @@ export default function App() {
             const lat = data[key].coordinates[0];
             const lng = data[key].coordinates[1];
             new mapboxgl.Marker({ color: 'black' }).setLngLat([lng, lat]).addTo(map.current);
-            // marker.setPopup(new mapboxgl.Popup().setHTML(`<h3>${data[key].name}</h3>`));
         }};
       })
       .catch(error => {
