@@ -38,3 +38,41 @@
     margin: 25px 50px;
   }
 }
+
+@media (max-width: 950px),(max-height: 700px) {
+  .modal {
+    width: 90vw;
+    height: 90vh;
+    h1 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 16px;
+    }
+    .img-container {
+      img {
+        height: 40px;
+        margin: 20px 40px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px),(max-height: 500px) {
+  .modal {
+    width: 90vw;
+    height: 90vh;
+    h1 {
+      font-size: 18px;
+    }
+    p {
+      font-size: 12px;
+    }
+    .img-container {
+      img {
+        height: 25px;
+        margin: 10px 20px;
+      }
+    }
+  }
+}
